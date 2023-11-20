@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
 
         isGameActive = false;
         gameOverScreen.SetActive(true);
-        scoreText.transform.position = new Vector3(563, 318, 0);
     }
 
     private void PauseGame()

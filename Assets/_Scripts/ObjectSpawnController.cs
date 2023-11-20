@@ -7,8 +7,8 @@ public class ObjectSpawnController : MonoBehaviour
     [SerializeField] private Transform mainCamera;
     [SerializeField] private GameObject[] spawnableObjectPrefabs;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float xRange = 1.6f;
-    [SerializeField] private float zRange = 1.75f;
+    [SerializeField] private float xRange = 1f;
+    [SerializeField] private float zRange = 1f;
 
     private GameManager gameManager;
 
