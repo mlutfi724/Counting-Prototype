@@ -5,6 +5,10 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ObjectController : MonoBehaviour
 {
+    [SerializeField] private AudioClip collideSFX;
+    [SerializeField] private AudioClip mergeSFX;
+    private AudioSource objectAudio;
+
     private bool isDropped;
     private bool isFalling;
 
@@ -19,10 +23,12 @@ public class ObjectController : MonoBehaviour
         objectRb = GetComponent<Rigidbody>();
         spawnController = FindObjectOfType<ObjectSpawnController>();
         gameManager = FindObjectOfType<GameManager>();
+        objectAudio = GetComponent<AudioSource>();
 
         isDropped = false;
         if (transform.position.y < 40.6f)
         {
+            objectAudio.PlayOneShot(mergeSFX);
             objectRb.useGravity = true;
             isFalling = true;
             isDropped = true;
@@ -53,6 +59,10 @@ public class ObjectController : MonoBehaviour
         if (collision.gameObject.tag == gameObject.tag) // checking if this object collides with the same tag
         {
             MergeObjects();
+        }
+        else
+        {
+            objectAudio.PlayOneShot(collideSFX);
         }
     }
 
