@@ -5,9 +5,11 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ObjectController : MonoBehaviour
 {
-    [SerializeField] private AudioClip collideSFX;
+    [SerializeField] private ParticleSystem smokeParticle;
+
+    [SerializeField] private AudioClip[] collideSFX;
     [SerializeField] private AudioClip mergeSFX;
-    private AudioSource objectAudio;
+    [SerializeField] private AudioClip inflatingSFX;
 
     private bool isDropped;
     private bool isFalling;
@@ -31,15 +33,16 @@ public class ObjectController : MonoBehaviour
         objectRb = GetComponent<Rigidbody>();
         spawnController = FindObjectOfType<ObjectSpawnController>();
         gameManager = FindObjectOfType<GameManager>();
-        objectAudio = GetComponent<AudioSource>();
 
         isDropped = false;
         if (transform.position.y < 40.6f)
         {
-            objectAudio.PlayOneShot(mergeSFX);
             objectRb.useGravity = true;
             isFalling = true;
             isDropped = true;
+            //smokeParticle.Play();
+            SoundFXManager.instance.PlaySoundFXClip(mergeSFX, transform, 1f);
+            // objectAudio.PlayOneShot(mergeSFX);
         }
     }
 
@@ -75,7 +78,8 @@ public class ObjectController : MonoBehaviour
         }
         else
         {
-            objectAudio.PlayOneShot(collideSFX);
+            SoundFXManager.instance.PlayRandomSoundFXClip(collideSFX, transform, 1f);
+            // objectAudio.PlayOneShot(collideSFX);
         }
     }
 
@@ -98,7 +102,7 @@ public class ObjectController : MonoBehaviour
 
     private IEnumerator GrowObject()
     {
-        isMaxSize = false;
+        //isMaxSize = false;
         Vector3 startScale = transform.localScale;
         Vector3 maxScale = new Vector3(maxSize, maxSize, maxSize);
 
