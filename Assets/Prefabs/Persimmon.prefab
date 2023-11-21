@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 9202142033946332818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.92, y: 37.35, z: 0.62}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collideSFX: {fileID: 8300000, guid: 1d7f762231d1a2c48bbe8a223e19e4d1, type: 3}
-  mergeSFX: {fileID: 8300000, guid: 5eb7dd437b279324283a5f90ac36b448, type: 3}
+  mergeSFX: {fileID: 8300000, guid: f140a49faec63154aa0e7a096551cd34, type: 3}
+  maxSize: 0.7
+  isMaxSize: 0
 --- !u!82 &523822802590519336
 AudioSource:
   m_ObjectHideFlags: 0

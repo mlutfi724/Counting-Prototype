@@ -17,6 +17,14 @@ public class ObjectController : MonoBehaviour
 
     private GameManager gameManager;
 
+    //Scale Growth
+    [SerializeField] private float maxSize;
+
+    [SerializeField] private bool isMaxSize;
+
+    private float timer = 0f;
+    private float growTime = 1f;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -37,6 +45,10 @@ public class ObjectController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!isMaxSize)
+        {
+            StartCoroutine(GrowObject());
+        }
     }
 
     // Update is called once per frame
@@ -59,6 +71,7 @@ public class ObjectController : MonoBehaviour
         if (collision.gameObject.tag == gameObject.tag) // checking if this object collides with the same tag
         {
             MergeObjects();
+            Debug.Log("Object Merged!");
         }
         else
         {
@@ -74,6 +87,7 @@ public class ObjectController : MonoBehaviour
         }
     }
 
+    // Give a time to check game over condition
     private IEnumerator DroppingObject()
     {
         isFalling = true;
@@ -82,19 +96,37 @@ public class ObjectController : MonoBehaviour
         isDropped = true;
     }
 
+    private IEnumerator GrowObject()
+    {
+        isMaxSize = false;
+        Vector3 startScale = transform.localScale;
+        Vector3 maxScale = new Vector3(maxSize, maxSize, maxSize);
+
+        do
+        {
+            transform.localScale = Vector3.Lerp(startScale, maxScale, timer / growTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (timer < growTime);
+
+        isMaxSize = true;
+    }
+
     private void MergeObjects()
     {
         int objectIndex = int.Parse(gameObject.tag);
         int scoreToAdd = objectIndex * 5 + 10;
 
         GameManager.newObjectPos = transform.position;
-        GameManager.isNewObjectSpawned = true;
         GameManager.objectIndex = objectIndex;
-
+        GameManager.isNewObjectSpawned = true;
         gameManager.UpdateScore(scoreToAdd);
-        //GameManager.objectIndex = int.Parse(gameObject.tag);
+
         Destroy(gameObject);
 
+        //GameManager.objectIndex = int.Parse(gameObject.tag);
         //add score
     }
 }
