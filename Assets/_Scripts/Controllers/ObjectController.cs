@@ -11,8 +11,9 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private AudioClip collideObjectSFX;
     [SerializeField] private AudioClip[] mergeSFX;
 
-    public bool isDropped;
+    private bool isDropped;
     private bool isFalling;
+    private Transform camera;
 
     private Rigidbody objectRb;
 
@@ -37,9 +38,10 @@ public class ObjectController : MonoBehaviour
         spawnController = FindObjectOfType<ObjectSpawnController>();
         gameManager = FindObjectOfType<GameManager>();
         slimeController = GetComponent<SlimeController>();
+        camera = Camera.main.transform;
 
         isDropped = false;
-        if (transform.position.y < 41.7f)
+        if (transform.position.y < 40f)
         {
             objectRb.useGravity = true;
             isFalling = true;
@@ -61,6 +63,7 @@ public class ObjectController : MonoBehaviour
         if (!isFalling)
         {
             transform.position = spawnController.transform.position;
+            transform.LookAt(camera);
             slimeController.SetSlimeFaceState(NewSlimeFaceState.Idle);
         }
 
@@ -75,7 +78,7 @@ public class ObjectController : MonoBehaviour
     {
         // to calculate the volume based on the Impact
         float sfxVolume = 0.1f * collision.relativeVelocity.magnitude;
-
+        Debug.Log("Impact: " + collision.relativeVelocity.magnitude);
         if (collision.gameObject.tag == gameObject.tag) // checking if this object collides with the same tag
         {
             SoundFXManager.instance.PlayRandomSoundFXClip(mergeSFX, transform, 1f);
@@ -90,7 +93,14 @@ public class ObjectController : MonoBehaviour
             SoundFXManager.instance.PlaySoundFXClip(collideObjectSFX, transform, sfxVolume);
         }
 
-        slimeController.SetSlimeFaceState(NewSlimeFaceState.Collide);
+        if (collision.relativeVelocity.magnitude > 0.5f)
+        {
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.Collide);
+        }
+        else
+        {
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.Dropped);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
