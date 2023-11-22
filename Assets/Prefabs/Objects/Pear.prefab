@@ -128,11 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed54b8c2384a2c48a43a439e8affc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smokeParticle: {fileID: 9100180053505613043}
-  collideSFX:
-  - {fileID: 8300000, guid: 5ad2b9a58f99df647aae007ee595777d, type: 3}
-  - {fileID: 8300000, guid: 47527ca2cf60f2142b3706621824d19f, type: 3}
-  mergeSFX: {fileID: 8300000, guid: db224e756a7705e4585952d5289a2ffd, type: 3}
+  collideGlassSFX: {fileID: 8300000, guid: 5ad2b9a58f99df647aae007ee595777d, type: 3}
+  collideObjectSFX: {fileID: 8300000, guid: 47527ca2cf60f2142b3706621824d19f, type: 3}
+  mergeSFX:
+  - {fileID: 8300000, guid: db224e756a7705e4585952d5289a2ffd, type: 3}
+  - {fileID: 8300000, guid: 6593e0d4ad5263946afa1ef18b372486, type: 3}
   inflatingSFX: {fileID: 8300000, guid: 06bb96e1faf3f22459d103a6d734ec45, type: 3}
   maxSize: 1
   isMaxSize: 0
@@ -216,10 +216,5 @@ PrefabInstance:
 --- !u!4 &8972414260720995521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 107540711077034587, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
-  m_PrefabInstance: {fileID: 9077678566565426842}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &9100180053505613043 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
   m_PrefabInstance: {fileID: 9077678566565426842}
   m_PrefabAsset: {fileID: 0}

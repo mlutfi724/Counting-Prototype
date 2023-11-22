@@ -5,19 +5,22 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ObjectController : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem smokeParticle;
+    // [SerializeField] private ParticleSystem smokeParticle;
 
-    [SerializeField] private AudioClip[] collideSFX;
-    [SerializeField] private AudioClip mergeSFX;
-    [SerializeField] private AudioClip inflatingSFX;
+    [SerializeField] private AudioClip collideGlassSFX;
+    [SerializeField] private AudioClip collideObjectSFX;
+    [SerializeField] private AudioClip[] mergeSFX;
 
-    private bool isDropped;
+    public bool isDropped;
     private bool isFalling;
 
     private Rigidbody objectRb;
+
+    //script references
     private ObjectSpawnController spawnController;
 
     private GameManager gameManager;
+    private SlimeController slimeController;
 
     //Scale Growth
     [SerializeField] private float maxSize;
@@ -33,16 +36,14 @@ public class ObjectController : MonoBehaviour
         objectRb = GetComponent<Rigidbody>();
         spawnController = FindObjectOfType<ObjectSpawnController>();
         gameManager = FindObjectOfType<GameManager>();
+        slimeController = GetComponent<SlimeController>();
 
         isDropped = false;
-        if (transform.position.y < 40.6f)
+        if (transform.position.y < 41.7f)
         {
             objectRb.useGravity = true;
             isFalling = true;
             isDropped = true;
-            //smokeParticle.Play();
-            SoundFXManager.instance.PlaySoundFXClip(mergeSFX, transform, 1f);
-            // objectAudio.PlayOneShot(mergeSFX);
         }
     }
 
@@ -60,6 +61,7 @@ public class ObjectController : MonoBehaviour
         if (!isFalling)
         {
             transform.position = spawnController.transform.position;
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.Idle);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive)
@@ -71,16 +73,24 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // to calculate the volume based on the Impact
+        float sfxVolume = 0.1f * collision.relativeVelocity.magnitude;
+
         if (collision.gameObject.tag == gameObject.tag) // checking if this object collides with the same tag
         {
+            SoundFXManager.instance.PlayRandomSoundFXClip(mergeSFX, transform, 1f);
             MergeObjects();
-            Debug.Log("Object Merged!");
+        }
+        else if (collision.gameObject.CompareTag("glass"))
+        {
+            SoundFXManager.instance.PlaySoundFXClip(collideGlassSFX, transform, sfxVolume);
         }
         else
         {
-            SoundFXManager.instance.PlayRandomSoundFXClip(collideSFX, transform, 1f);
-            // objectAudio.PlayOneShot(collideSFX);
+            SoundFXManager.instance.PlaySoundFXClip(collideObjectSFX, transform, sfxVolume);
         }
+
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.Collide);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,8 +105,10 @@ public class ObjectController : MonoBehaviour
     private IEnumerator DroppingObject()
     {
         isFalling = true;
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.Falling);
         isDropped = false;
         yield return new WaitForSeconds(spawnController.objectFallDuration);
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.Dropped);
         isDropped = true;
     }
 

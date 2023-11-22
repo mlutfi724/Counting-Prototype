@@ -17,6 +17,7 @@ TagManager:
   - 10
   - Box
   - limit
+  - glass
   layers:
   - Default
   - TransparentFX
