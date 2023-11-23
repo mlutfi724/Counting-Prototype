@@ -41,7 +41,7 @@ public class ObjectController : MonoBehaviour
         camera = Camera.main.transform;
 
         isDropped = false;
-        if (transform.position.y < 40f)
+        if (transform.position.y < 3f)
         {
             objectRb.useGravity = true;
             isFalling = true;
@@ -64,7 +64,7 @@ public class ObjectController : MonoBehaviour
         {
             transform.position = spawnController.transform.position;
             transform.LookAt(camera);
-            slimeController.SetSlimeFaceState(NewSlimeFaceState.Idle);
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.NoMouthFace);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive)
@@ -95,11 +95,11 @@ public class ObjectController : MonoBehaviour
 
         if (collision.relativeVelocity.magnitude > 0.5f)
         {
-            slimeController.SetSlimeFaceState(NewSlimeFaceState.Collide);
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.CrossedEyesFace);
         }
         else
         {
-            slimeController.SetSlimeFaceState(NewSlimeFaceState.Dropped);
+            slimeController.SetSlimeFaceState(NewSlimeFaceState.CuteFace);
         }
     }
 
@@ -115,10 +115,9 @@ public class ObjectController : MonoBehaviour
     private IEnumerator DroppingObject()
     {
         isFalling = true;
-        slimeController.SetSlimeFaceState(NewSlimeFaceState.Falling);
         isDropped = false;
         yield return new WaitForSeconds(spawnController.objectFallDuration);
-        slimeController.SetSlimeFaceState(NewSlimeFaceState.Dropped);
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.CuteFace);
         isDropped = true;
     }
 

@@ -6,6 +6,7 @@ public class ObjectSpawnController : MonoBehaviour
 {
     [SerializeField] private Transform mainCamera;
     [SerializeField] private GameObject[] spawnableObjectPrefabs;
+    [SerializeField] private GameObject fallTrajectory;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float xRange = 1f;
     [SerializeField] private float zRange = 1f;
@@ -73,6 +74,7 @@ public class ObjectSpawnController : MonoBehaviour
     private IEnumerator SpawnDelay()
     {
         canSpawn = false;
+        fallTrajectory.SetActive(false);
         yield return new WaitForSeconds(objectFallDuration);
         SpawnObject();
     }
@@ -80,6 +82,7 @@ public class ObjectSpawnController : MonoBehaviour
     public void SpawnObject()
     {
         canSpawn = true;
+        fallTrajectory.SetActive(true);
         int randomizeObject = Random.Range(0, spawnableObjectPrefabs.Length);
         Instantiate(spawnableObjectPrefabs[randomizeObject], transform.position, spawnableObjectPrefabs[randomizeObject].transform.rotation);
     }
