@@ -13,7 +13,7 @@ public class ObjectController : MonoBehaviour
 
     private bool isDropped;
     private bool isFalling;
-    private Transform camera;
+    private new Transform camera;
 
     private Rigidbody objectRb;
 
@@ -93,7 +93,7 @@ public class ObjectController : MonoBehaviour
             SoundFXManager.instance.PlaySoundFXClip(collideObjectSFX, transform, sfxVolume);
         }
 
-        if (collision.relativeVelocity.magnitude > 0.5f)
+        if (collision.relativeVelocity.magnitude > 1f)
         {
             slimeController.SetSlimeFaceState(NewSlimeFaceState.CrossedEyesFace);
         }
@@ -146,6 +146,7 @@ public class ObjectController : MonoBehaviour
 
         GameManager.newObjectPos = transform.position;
         GameManager.objectIndex = objectIndex;
+
         GameManager.isNewObjectSpawned = true;
         gameManager.UpdateScore(scoreToAdd);
 
