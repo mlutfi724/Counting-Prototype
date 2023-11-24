@@ -95,11 +95,7 @@ public class ObjectController : MonoBehaviour
 
         if (collision.relativeVelocity.magnitude > 1f)
         {
-            slimeController.SetSlimeFaceState(NewSlimeFaceState.CrossedEyesFace);
-        }
-        else
-        {
-            slimeController.SetSlimeFaceState(NewSlimeFaceState.CuteFace);
+            StartCoroutine(SlimeFaceStateChange());
         }
     }
 
@@ -109,6 +105,13 @@ public class ObjectController : MonoBehaviour
         {
             gameManager.GameOver();
         }
+    }
+
+    private IEnumerator SlimeFaceStateChange()
+    {
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.CrossedEyesFace);
+        yield return new WaitForSeconds(1f);
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.CuteFace);
     }
 
     // Give a time to check game over condition
