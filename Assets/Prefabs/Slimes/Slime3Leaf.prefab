@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5922091577657788700}
   - component: {fileID: 5922091577657788707}
   - component: {fileID: 5922091577657788706}
+  - component: {fileID: 3413179384635593192}
   m_Layer: 0
   m_Name: Slime3Leaf
   m_TagString: 6
@@ -96,9 +97,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3064202
-  m_Height: 0.8323833
+  m_Height: 0.6910952
   m_Direction: 1
-  m_Center: {x: -0.0028330085, y: 0.35387522, z: 0}
+  m_Center: {x: -0.0028330085, y: 0.30831617, z: 0}
 --- !u!95 &5922091577657788700
 Animator:
   serializedVersion: 5
@@ -153,6 +154,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6593e0d4ad5263946afa1ef18b372486, type: 3}
   maxSize: 2
   isMaxSize: 0
+--- !u!136 &3413179384635593192
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976350173447602547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.174674
+  m_Height: 0.34934798
+  m_Direction: 1
+  m_Center: {x: -0.0022286526, y: 0.56535226, z: 0}
 --- !u!1 &1978178961048646123
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using static UnityEngine.GraphicsBuffer;
 
 public class ObjectController : MonoBehaviour
 {
@@ -63,7 +64,7 @@ public class ObjectController : MonoBehaviour
         if (!isFalling)
         {
             transform.position = spawnController.transform.position;
-            transform.LookAt(camera);
+            LookCamera();
             slimeController.SetSlimeFaceState(NewSlimeFaceState.NoMouthFace);
         }
 
@@ -95,7 +96,7 @@ public class ObjectController : MonoBehaviour
 
         if (collision.relativeVelocity.magnitude > 1f)
         {
-            StartCoroutine(SlimeFaceStateChange());
+            StartCoroutine(SlimeCollideFaceStateChange());
         }
     }
 
@@ -107,7 +108,7 @@ public class ObjectController : MonoBehaviour
         }
     }
 
-    private IEnumerator SlimeFaceStateChange()
+    private IEnumerator SlimeCollideFaceStateChange()
     {
         slimeController.SetSlimeFaceState(NewSlimeFaceState.CrossedEyesFace);
         yield return new WaitForSeconds(1f);
@@ -119,6 +120,7 @@ public class ObjectController : MonoBehaviour
     {
         isFalling = true;
         isDropped = false;
+        slimeController.SetSlimeFaceState(NewSlimeFaceState.AngryFace);
         yield return new WaitForSeconds(spawnController.objectFallDuration);
         slimeController.SetSlimeFaceState(NewSlimeFaceState.CuteFace);
         isDropped = true;
@@ -140,6 +142,19 @@ public class ObjectController : MonoBehaviour
         while (timer < growTime);
 
         isMaxSize = true;
+    }
+
+    private void LookCamera()
+    {
+        //Vector3 camPos = ;
+        //camPos.x = 0f;
+        //camPos.z = 0f;
+        //transform.LookAt(camera);
+
+        var newRotation = Quaternion.LookRotation(camera.position - transform.position);
+        newRotation.z = 0.0f;
+        newRotation.x = 0.0f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 8);
     }
 
     private void MergeObjects()

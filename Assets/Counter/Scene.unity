@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Slime Game
+  m_text: The Slime King
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 877420ff295630f4696277c711b3f226, type: 2}
   m_sharedMaterial: {fileID: -4459392815898323378, guid: 877420ff295630f4696277c711b3f226, type: 2}

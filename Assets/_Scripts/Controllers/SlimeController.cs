@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum NewSlimeFaceState
-{ SavoringFace, CuteFace, NoMouthFace, CrossedEyesFace }
+{ SavoringFace, CuteFace, NoMouthFace, CrossedEyesFace, AngryFace }
 
 public class SlimeController : MonoBehaviour
 {
@@ -41,6 +41,10 @@ public class SlimeController : MonoBehaviour
 
             case NewSlimeFaceState.CrossedEyesFace:
                 SetFace(faces.damageFace);
+                break;
+
+            case NewSlimeFaceState.AngryFace:
+                SetFace(faces.attackFace);
                 break;
         }
     }

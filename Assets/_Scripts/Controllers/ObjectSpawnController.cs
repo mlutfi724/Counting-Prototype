@@ -30,7 +30,7 @@ public class ObjectSpawnController : MonoBehaviour
     private void Update()
     {
         // Using input to spawn the object
-        if (Input.GetKey(KeyCode.Space) && gameManager.isGameActive)
+        if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive)
         {
             SpawnObjectValidate();
         }

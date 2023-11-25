@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 5261103927423107615}
   - component: {fileID: 5261103927423107809}
   - component: {fileID: 5261103927423107808}
+  - component: {fileID: 4291043497175534905}
   m_Layer: 0
   m_Name: Slime3Sprout
   m_TagString: 5
@@ -282,10 +283,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 3eaa09312e7122044a2a9ec965a7e2e5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.30646968
-  m_Height: 0.7920764
+  m_Radius: 0.30466044
+  m_Height: 0.684365
   m_Direction: 1
-  m_Center: {x: -0.0022696073, y: 0.3242456, z: 0.0044437097}
+  m_Center: {x: -0.00004401574, y: 0.3051359, z: 0.0044437097}
 --- !u!95 &5261103927423107615
 Animator:
   serializedVersion: 5
@@ -340,6 +341,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6593e0d4ad5263946afa1ef18b372486, type: 3}
   maxSize: 1.7
   isMaxSize: 0
+--- !u!136 &4291043497175534905
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135693383688442684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.09221206
+  m_Height: 0.23936722
+  m_Direction: 1
+  m_Center: {x: -0.00003062762, y: 0.6649263, z: 0}
 --- !u!1 &3135693383766773635
 GameObject:
   m_ObjectHideFlags: 0
