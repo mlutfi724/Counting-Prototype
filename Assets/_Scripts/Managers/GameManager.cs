@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] allObjectPrefabs;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI gameplayHighScoreText;
+    [SerializeField] private TextMeshProUGUI titleHighScoreText;
     [SerializeField] private GameObject titleScreen;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject gameOverScreen;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         objectSpawnController = FindObjectOfType<ObjectSpawnController>();
+        UpdateHighScore();
     }
 
     // Update is called once per frame
@@ -67,6 +70,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public void GameOver()
@@ -77,12 +86,13 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         if (!isPaused)
         {
             pauseScreen.gameObject.SetActive(true);
             isPaused = true;
+            Cursor.visible = true;
             Time.timeScale = 0f;
         }
         else
@@ -99,5 +109,21 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+        CheckHighScore();
+    }
+
+    private void CheckHighScore()
+    {
+        if (score > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            UpdateHighScore();
+        }
+    }
+
+    private void UpdateHighScore()
+    {
+        gameplayHighScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
+        titleHighScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
     }
 }
