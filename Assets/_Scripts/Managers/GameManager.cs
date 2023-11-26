@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject titleScreen;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject gameplayScreen;
 
     private int score;
     private bool isPaused;
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         objectSpawnController.SpawnObject();
-        scoreText.gameObject.SetActive(true);
+        gameplayScreen.SetActive(true);
         titleScreen.SetActive(false);
 
         score = 0;
