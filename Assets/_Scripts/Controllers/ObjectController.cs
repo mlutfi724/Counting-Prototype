@@ -68,7 +68,7 @@ public class ObjectController : MonoBehaviour
             slimeController.SetSlimeFaceState(NewSlimeFaceState.NoMouthFace);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive)
+        if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive && !isDropped)
         {
             StartCoroutine(DroppingObject());
             objectRb.useGravity = true;
@@ -77,9 +77,9 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // to calculate the volume based on the Impact
+        // calculate the volume based on Impact
         float sfxVolume = 0.1f * collision.relativeVelocity.magnitude;
-        Debug.Log("Impact: " + collision.relativeVelocity.magnitude);
+        // Debug.Log("Impact: " + collision.relativeVelocity.magnitude);
         if (collision.gameObject.tag == gameObject.tag) // checking if this object collides with the same tag
         {
             SoundFXManager.instance.PlayRandomSoundFXClip(mergeSFX, transform, 1f);
