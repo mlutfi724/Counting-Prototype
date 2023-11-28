@@ -126,4 +126,9 @@ public class GameManager : MonoBehaviour
         gameplayHighScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
         titleHighScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
     }
+
+    public void ResetGameData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

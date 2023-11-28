@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
             localRot.x += Input.GetAxis("Mouse X") * mouseSpeed;
             localRot.y -= Input.GetAxis("Mouse Y") * mouseSpeed;
 
-            localRot.y = Mathf.Clamp(localRot.y, -90f, 90f);
+            localRot.y = Mathf.Clamp(localRot.y, -89f, 89f);
 
             Quaternion quaternionRotation = Quaternion.Euler(localRot.y, localRot.x, 0f);
             transform.rotation = Quaternion.Lerp(transform.rotation, quaternionRotation, Time.deltaTime * orbitDamping);
