@@ -68,7 +68,7 @@ public class ObjectController : MonoBehaviour
             slimeController.SetSlimeFaceState(NewSlimeFaceState.NoMouthFace);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive && !isDropped)
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.isGameActive && !isDropped)
         {
             StartCoroutine(DroppingObject());
             objectRb.useGravity = true;

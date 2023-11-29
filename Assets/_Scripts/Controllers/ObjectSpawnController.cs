@@ -30,13 +30,13 @@ public class ObjectSpawnController : MonoBehaviour
     private void Update()
     {
         // Using input to spawn the object
-        if (Input.GetKeyDown(KeyCode.Space) && gameManager.isGameActive)
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.isGameActive)
         {
             SpawnObjectValidate();
         }
 
         // The object can only move if it already spawned
-        if (canSpawn && gameManager.isGameActive)
+        if (canSpawn && GameManager.isGameActive)
         {
             ObjectSpawnerMovement();
         }

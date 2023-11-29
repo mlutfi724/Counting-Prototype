@@ -8,18 +8,18 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float mouseSpeed = 3;
     [SerializeField] private float orbitDamping = 10;
 
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private Vector3 localRot;
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        //gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (gameManager.isGameActive)
+        if (GameManager.isGameActive)
         {
             //transform.position = boxTransform.position;
 

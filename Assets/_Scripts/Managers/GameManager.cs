@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public static bool isNewObjectSpawned;
     public static Vector3 newObjectPos;
     public static int objectIndex;
-    public bool isGameActive;
+    public static bool isGameActive;
 
     // Start is called before the first frame update
     private void Start()
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+        playfabManager.GetLeaderboard();
     }
 
     public void RestartGame()
@@ -83,11 +84,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        playfabManager.SendLeaderboard(score);
         Cursor.visible = true;
 
         isGameActive = false;
         gameOverScreen.SetActive(true);
-        playfabManager.SendLeaderboard(score);
     }
 
     public void PauseGame()
