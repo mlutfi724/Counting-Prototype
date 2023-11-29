@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 
     private int score;
     private bool isPaused;
+
     private ObjectSpawnController objectSpawnController;
+    private PlayfabManager playfabManager;
 
     public static bool isNewObjectSpawned;
     public static Vector3 newObjectPos;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         objectSpawnController = FindObjectOfType<ObjectSpawnController>();
+        playfabManager = FindObjectOfType<PlayfabManager>();
         UpdateHighScore();
     }
 
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
 
         isGameActive = false;
         gameOverScreen.SetActive(true);
+        playfabManager.SendLeaderboard(score);
     }
 
     public void PauseGame()
