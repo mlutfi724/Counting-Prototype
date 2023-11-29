@@ -13,6 +13,7 @@ public class PlayfabManager : MonoBehaviour
 
     [SerializeField] private GameObject scoreRowPrefab;
     [SerializeField] private Transform rowsParent;
+    [SerializeField] private TextMeshProUGUI notificationText;
 
     private void Start()
     {
@@ -56,11 +57,23 @@ public class PlayfabManager : MonoBehaviour
 
     public void SubmitNameButton()
     {
-        var request = new UpdateUserTitleDisplayNameRequest
+        if (nameInput.text.Length > 16)
         {
-            DisplayName = nameInput.text,
-        };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            notificationText.gameObject.SetActive(true);
+            notificationText.text = "Username is too long!";
+        }
+        else
+        {
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = nameInput.text,
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            notificationText.text = "Username submitted!";
+            notificationText.gameObject.SetActive(true);
+            usernameWindow.SetActive(false);
+            playAgainWindow.SetActive(true);
+        }
     }
 
     private void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
@@ -101,18 +114,13 @@ public class PlayfabManager : MonoBehaviour
         {
             StatisticName = "HighScore",
             StartPosition = 0,
-            MaxResultsCount = 3,
+            MaxResultsCount = 5,
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
 
     private void OnLeaderboardGet(GetLeaderboardResult result)
     {
-        foreach (Transform item in rowsParent)
-        {
-            Destroy(item.gameObject);
-        }
-
         foreach (var item in result.Leaderboard)
         {
             GameObject newScoreRow = Instantiate(scoreRowPrefab, rowsParent);

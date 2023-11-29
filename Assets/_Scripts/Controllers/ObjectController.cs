@@ -160,17 +160,9 @@ public class ObjectController : MonoBehaviour
     private void MergeObjects()
     {
         int objectIndex = int.Parse(gameObject.tag);
-        int scoreToAdd = objectIndex * 5 + 10;
-
         GameManager.newObjectPos = transform.position;
         GameManager.objectIndex = objectIndex;
-
         GameManager.isNewObjectSpawned = true;
-        gameManager.UpdateScore(scoreToAdd);
-
         Destroy(gameObject);
-
-        //GameManager.objectIndex = int.Parse(gameObject.tag);
-        //add score
     }
 }

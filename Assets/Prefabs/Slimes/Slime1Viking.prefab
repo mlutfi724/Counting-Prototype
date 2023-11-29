@@ -99,8 +99,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3446688
-  m_Center: {x: 0, y: 0.27814594, z: 0}
+  m_Radius: 0.3301735
+  m_Center: {x: 0, y: 0.27524948, z: 0}
 --- !u!95 &5652534598747965447
 Animator:
   serializedVersion: 5

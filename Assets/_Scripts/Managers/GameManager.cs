@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         objectSpawnController = FindObjectOfType<ObjectSpawnController>();
         playfabManager = FindObjectOfType<PlayfabManager>();
+        isGameActive = false;
         UpdateHighScore();
     }
 
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         if (isNewObjectSpawned)
         {
             Instantiate(allObjectPrefabs[objectIndex + 1], newObjectPos, allObjectPrefabs[objectIndex + 1].transform.rotation);
+            int scoreToAdd = (objectIndex * 5 + 10) * 2;
+            UpdateScore(scoreToAdd);
             isNewObjectSpawned = false;
         }
     }
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateScore(int scoreToAdd)
+    private void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;

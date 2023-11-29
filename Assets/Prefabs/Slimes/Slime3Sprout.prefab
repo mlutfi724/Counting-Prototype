@@ -283,10 +283,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 3eaa09312e7122044a2a9ec965a7e2e5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.30466044
-  m_Height: 0.684365
+  m_Radius: 0.29468217
+  m_Height: 0.6577559
   m_Direction: 1
-  m_Center: {x: -0.00004401574, y: 0.3051359, z: 0.0044437097}
+  m_Center: {x: -0.00004401574, y: 0.31844035, z: 0.001117633}
 --- !u!95 &5261103927423107615
 Animator:
   serializedVersion: 5
@@ -351,10 +351,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.09221206
+  m_Radius: 0.087222874
   m_Height: 0.23936722
   m_Direction: 1
-  m_Center: {x: -0.00003062762, y: 0.6649263, z: 0}
+  m_Center: {x: -0.0016936889, y: 0.6649263, z: 0}
 --- !u!1 &3135693383766773635
 GameObject:
   m_ObjectHideFlags: 0
