@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         UpdateScore(0);
 
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         playfabManager.GetLeaderboard();
     }
 
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         playfabManager.SendLeaderboard(score);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
 
         isGameActive = false;
         gameOverScreen.SetActive(true);
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
             pauseScreen.gameObject.SetActive(true);
             isPaused = true;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0f;
         }
         else
@@ -109,7 +111,7 @@ public class GameManager : MonoBehaviour
             isPaused = false;
             Time.timeScale = 1f;
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

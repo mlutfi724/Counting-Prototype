@@ -70,6 +70,11 @@ public class PlayfabManager : MonoBehaviour
             notificationText.gameObject.SetActive(true);
             notificationText.text = "Username is too long!";
         }
+        else if (nameInput.text.Length < 3)
+        {
+            notificationText.gameObject.SetActive(true);
+            notificationText.text = "The username needs at least 3 characters!";
+        }
         else
         {
             var request = new UpdateUserTitleDisplayNameRequest
