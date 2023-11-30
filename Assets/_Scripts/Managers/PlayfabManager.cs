@@ -4,6 +4,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayfabManager : MonoBehaviour
     [SerializeField] private Transform rowsParent;
     [SerializeField] private TextMeshProUGUI notificationText;
 
+    [SerializeField] private Button startButton;
+
     private void Start()
     {
         Login();
@@ -22,6 +25,8 @@ public class PlayfabManager : MonoBehaviour
 
     private void Login()
     {
+        notificationText.gameObject.SetActive(true);
+        notificationText.text = "Loading...";
         var request = new LoginWithCustomIDRequest
         {
             CustomId = SystemInfo.deviceUniqueIdentifier,
@@ -37,6 +42,9 @@ public class PlayfabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
+        startButton.gameObject.SetActive(true);
+        notificationText.gameObject.SetActive(false);
+
         Debug.Log("Successful login/account create!");
         string name = null;
         if (result.InfoResultPayload.PlayerProfile != null)
