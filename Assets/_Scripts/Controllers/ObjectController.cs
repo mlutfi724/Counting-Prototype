@@ -77,6 +77,8 @@ public class ObjectController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        isFalling = true; // to prevent merged object stuck in the spawnPoint
+
         // calculate the volume based on Impact
         float sfxVolume = 0.1f * collision.relativeVelocity.magnitude;
         // Debug.Log("Impact: " + collision.relativeVelocity.magnitude);
